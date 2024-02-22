@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+
+<h1>cliente</h1>
+
+<br>
+
+{% endblock %}
+
+<form method="post">{% csrf_token %}
+
+    {{form.as_p}}
+    <input type="submit" value="Enviar" />
+
+
+</form>
+
+{% endblock %}

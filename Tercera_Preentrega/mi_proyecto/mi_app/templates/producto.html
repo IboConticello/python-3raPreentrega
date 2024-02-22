@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+
+<h1>producto</h1>
+
+<br>
+
+{% endblock %}
+
+<form action="{% url 'producto' %}" method="POST"> {% csrf_token %}
+
+    <table>
+
+        {{formulario.as_table}}
+
+    </table>
+
+    <input type="submit" value="Enviar">
+
+
+</form>
+{% endblock %}

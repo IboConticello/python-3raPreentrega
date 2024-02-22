@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+
+<h1>envio</h1>
+
+<br>
+
+{% endblock %}
+
+<form method="post" action="">
+    {% csrf_token %}
+    {{ formulario.as_p }}
+    <button type="submit">Enviar</button>
+</form>
+
+{% endblock %}

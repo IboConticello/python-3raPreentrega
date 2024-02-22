@@ -1,0 +1,63 @@
+<!-- base.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+
+    {% load static %}
+
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        /* Personalización del color de fondo del navbar */
+        .custom-navbar {
+            background-color: #1770ca;
+        }
+
+        /* Estilo de los botones en el navbar */
+        .custom-navbar .nav-item {
+            margin: 0 5px;
+        }
+
+        .custom-navbar .nav-link {
+            border: 2px solid #0b5392; /* Violeta oscuro */
+            color: #0b5392; /* Violeta oscuro */
+            border-radius: 5px;
+            padding: 8px 15px;
+            transition: background-color 0.3s, color 0.3s;
+        }
+
+        .custom-navbar .nav-link:hover {
+            background-color: #1b0db4; /* Violeta oscuro al pasar el ratón */
+            color: #fff; /* Texto blanco al pasar el ratón */
+        }
+    </style>
+    <title>Mi Proyecto Django</title>
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-light custom-navbar">
+        <a class="navbar-brand" href="{% url 'inicio' %}">Coderhouse</a>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav">
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'inicio' %}">Inicio</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'cliente' %}">Clientes</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'producto' %}">producto</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'envio' %}">envio</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+    <div class="container mt-4">
+       
+    </div>
+</body>
+</html>
