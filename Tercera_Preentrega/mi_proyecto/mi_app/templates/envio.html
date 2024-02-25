@@ -4,12 +4,14 @@
 
 <br>
 
-{% endblock %}
+{% block contenido%}
 
-<form method="post" action="">
+<form action="{% url 'envio' %}" method="POST">
     {% csrf_token %}
+    <table>
     {{ formulario.as_p }}
-    <button type="submit">Enviar</button>
+    </table>
+    <input type="submit" value="Enviar">
 </form>
 
 {% endblock %}

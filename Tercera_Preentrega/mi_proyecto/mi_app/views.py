@@ -22,7 +22,7 @@ def cliente_form_view(request):
             nombre = info['nombre']
             apellido = info['apellido']
             correo = info['correo']
-            cliente = ClienteForm (nombre=nombre, apellido=apellido,correo=correo)
+            cliente = Cliente (nombre=nombre, apellido=apellido,correo=correo)
             cliente.save()
             return render(request, "inicio.html")
 
@@ -43,7 +43,7 @@ def producto_form_view(request):
             nombre = info['nombre']
             descripcion = info['descripcion']
             precio = info['precio']
-            producto = ProductoForm (nombre=nombre, descripcion=descripcion,precio=precio)
+            producto = Producto (nombre=nombre, descripcion=descripcion,precio=precio)
             producto.save()
             return render(request, "inicio.html")
 
@@ -58,12 +58,27 @@ def envio_form_view(request):
         print(form)
         if form.is_valid():
             info = form.cleaned_data
-            calle = info('calle')
-            altura = info('altura')
-            ciudad = info('ciudad')
-            envio = EnvioForm (calle=calle, altura=altura,ciudad=ciudad)
+            calle = info['calle']
+            altura = info['altura']
+            ciudad = info['ciudad']
+            envio = Envio (calle=calle, altura=altura,ciudad=ciudad)
             envio.save()
-            return render(request, "mi_app/inicio.html")
+            return render(request, "inicio.html")
     else:
         form = EnvioForm()
-    return render(request, "mi_app/envio.html", {"formulario":form})
+    return render(request, "envio.html", {"formulario":form})
+
+
+### busqueda ###
+
+def busqueda_cliente_view(request):
+    return render(request, "busquedaCliente.html")
+
+
+def buscar(request):
+    correo = request.GET.get('correo')
+    if correo:
+        clientes = Cliente.objects.filter(correo__icontains=correo)
+        return render(request, "resultadoBusqueda.html", {"clientes": clientes})
+    else:
+        return render(request, "resultadoBusqueda.html", {"clientes": None})

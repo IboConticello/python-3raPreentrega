@@ -7,7 +7,9 @@ from .views import *
 
 urlpatterns = [
     path ('', inicio, name='inicio'),
-    path ('cliente/', ClienteForm, name='cliente'),
-    path ('producto/', ProductoForm, name='producto'),
-    path ('envio/', EnvioForm, name='envio'),
+    path ('cliente/', cliente_form_view, name='cliente'),
+    path ('producto/', producto_form_view, name='producto'),
+    path ('envio/', envio_form_view, name='envio'),
+    path ('busquedaCliente/', busqueda_cliente_view, name='busquedaCliente'),
+    path ('buscar/', buscar, name='buscar'),
 ]

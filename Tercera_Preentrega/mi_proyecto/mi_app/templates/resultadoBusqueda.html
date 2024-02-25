@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+
+<h1>Resultado cliente</h1>
+
+<br>
+
+{% block contenido %}
+    {% if clientes %}
+        <ul style="color: rgb(18, 18, 119)">
+            {% for cliente in clientes %}
+                <li>{{ cliente.nombre }}</li>
+                <li>{{ cliente.apellido }}</li>
+                <li>{{ cliente.correo }}</li>    
+            {% endfor %}
+        </ul>
+    {% else %}
+        <p>No hay ningún cliente registrado con ese correo</p>
+    {% endif %}
+{% endblock %}
