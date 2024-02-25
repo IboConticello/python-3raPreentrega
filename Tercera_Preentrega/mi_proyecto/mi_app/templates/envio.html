@@ -6,12 +6,12 @@
 
 {% block contenido%}
 
-<form action="{% url 'envio' %}" method="POST">
+<form class="mi-formulario" action="{% url 'envio' %}" method="POST">
     {% csrf_token %}
     <table>
     {{ formulario.as_p }}
     </table>
-    <input type="submit" value="Enviar">
+    <input class="mi-boton" type="submit" value="Enviar">
 </form>
 
 {% endblock %}

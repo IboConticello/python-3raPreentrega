@@ -3,12 +3,9 @@
 Este proyecto sigue el patrón MVT y utiliza Django para crear un sistema web con las siguientes características:
 
 1. **Orden de Pruebas:**
-   - Insertar Datos: Accede a la URL "/insertar/" para ingresar datos a las clases.
    - Buscar Datos: Accede a la URL "/buscar/" para buscar datos en la base de datos.
 
 2. **Funcionalidades:**
-   - **Insertar Datos:**
-      - URL: /insertar/
       - Formularios disponibles para cliente, envio y producto.
 
 

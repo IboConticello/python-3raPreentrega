@@ -7,9 +7,9 @@
 {% block contenido %}
     <p>Indique su correo electronico dado de alta en nuestra pagina:</p>
     <br>
-    <form action="{% url 'buscar' %}" method="GET">
+    <form class="mi-formulario" action="{% url 'buscar' %}" method="GET">
         <input type="email" name="correo" id="correo">
-        <input type="submit" value="Buscar">
+        <input class="mi-boton" type="submit" value="Buscar">
     </form>
     <br>
 {% endblock %}

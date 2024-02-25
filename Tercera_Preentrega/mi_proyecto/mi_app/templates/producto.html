@@ -6,7 +6,7 @@
 
 {% block contenido%}
 
-<form action="{% url 'producto' %}" method="POST"> {% csrf_token %}
+<form class="mi-formulario" action="{% url 'producto' %}" method="POST"> {% csrf_token %}
 
     <table>
 
@@ -14,7 +14,7 @@
 
     </table>
 
-    <input type="submit" value="Enviar">
+    <input class="mi-boton" type="submit" value="Enviar">
 
 
 </form>

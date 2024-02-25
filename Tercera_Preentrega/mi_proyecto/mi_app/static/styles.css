@@ -1,0 +1,49 @@
+/* Estilos para el formulario */
+.mi-formulario {
+    width: 50%;
+    margin: auto;
+    background-color: #f2f2f2;
+    padding: 20px;
+    border-radius: 10px;
+}
+
+/* Estilos para los campos de entrada específicos */
+.mi-formulario input[type="text"] {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 10px;
+    box-sizing: border-box;
+    border: 1px solid #c3bcbc;
+    border-radius: 5px;
+}
+
+/* Estilos para los campos de entrada específicos */
+.mi-formulario input[type="number"] {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 10px;
+    box-sizing: border-box;
+    border: 1px solid #c3bcbc;
+    border-radius: 5px;
+}
+
+.mi-formulario input[type="email"] {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 10px;
+    box-sizing: border-box;
+    border: 1px solid #c3bcbc;
+    border-radius: 5px;
+}
+
+/* Estilos para el botón de enviar */
+.mi-boton {
+    background-color: #125ce4;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+/* Estilos adicionales según sea necesario */
