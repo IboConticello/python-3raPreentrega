@@ -1,25 +1,40 @@
-# Mi Proyecto Django
+# Proyecto Final Coder House - Python
+#### Comisión: 50205
+#### Alumno: Conticello Ibo & Kowalezuk Kowaliszyn Sol
 
-Este proyecto sigue el patrón MVT y utiliza Django para crear un sistema web con las siguientes características:
+## Nombre del Proyecto
+Reseña de libros - Romance y Fantasía
 
-1. **Orden de Pruebas:**
-   - Buscar Datos: Accede a la URL "/buscar/" para buscar datos en la base de datos.
+## Versión
+1.0
 
-2. **Funcionalidades:**
-      - Formularios disponibles para cliente, envio y producto.
+## Descripción del Proyecto
+Página Web destinada a usuarios que deseen comentar respecto de sus experiencias con diversos libros relacionados a los generos romance y fantasia
+
+A fin de navegar por las secciones de la página web, el usuario será requerido iniciar sesión o registrarse en caso de no contar con usuario o contraseña. En ambas opciones, una vez la página valide la autenticación del usuario, este será redirigido al inicio de la página web.
+
+Los usuarios pueden realizar las siguientes accciones:
+- Publicar libros
+- Visualizar libros publicados, los cuales están distribuidos en las secciones "Romance" y "Fantasía".
+- Comentar sus propias reseñas
+- Editar el perfil de Usuario
+- Cambiar la contraseña de Usuario
+- Cerrar Sesión
+- Login en caso de haber cerrado sesión
+
+Nota: La opción de editar y eliminar solo le está permitido al autor de la publicación del instrumento.
+
+Todo el proyecto fue elaborado 50% y 50% entre Conticello Ibo y Kowalezuk Maria Sol.
 
 
-# Ejecución del Proyecto
 
-Para ejecutar el proyecto, sigue estos pasos:
 
-1. Clona el repositorio.
-2. Crea un entorno virtual.
-3. Instala las dependencias con `pip install -r requirements.txt`.
-4. Ejecuta las migraciones con `python manage.py migrate`.
-5. Inicia el servidor con `python manage.py runserver`.
 
-# Acceso a la Página de Administración
 
-- URL: http://localhost:8000/admin/
-- Utiliza las credenciales del superusuario para acceder y verificar los datos ingresados.
+
+
+
+
+
+
+
