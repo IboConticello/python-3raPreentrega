@@ -1,87 +1,22 @@
 from django.shortcuts import render, redirect
-from django.http import HttpResponse
-from django.views.decorators.csrf import csrf_exempt
+from django.views.decorators.http import require_http_methods
 from mi_app.models import *
-from mi_app.forms import ClienteForm, ProductoForm, EnvioForm, FormularioRegistroUsuario, FormularioCambioPassword, FormularioEdicion
+from mi_app.models import Libros, Comentario
+from mi_app.forms import ActualizacionLibros, FormularioCambioPassword, FormularioEdicion, FormularioRegistroUsuario, FormularioComentario, FormularioNuevoLibros
 from django.views.generic import TemplateView, ListView, DetailView, UpdateView
 from django.contrib.auth.views import LoginView, PasswordChangeView
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth import login
+from django.contrib.auth.decorators import login_required
+from django.db import IntegrityError
+from django.utils import timezone
+from django.contrib.auth import logout
 from django.urls import reverse_lazy
 from django.views.generic.edit import CreateView, UpdateView, DeleteView, FormView 
 
 def inicio(request):
     return render(request,'inicio.html')
 
-
-def cliente_form_view(request):
-    if request.method == "POST":
-        form=ClienteForm(request.POST)  
-        print(form)
-        if form.is_valid():
-            info = form.cleaned_data
-            nombre = info['nombre']
-            apellido = info['apellido']
-            correo = info['correo']
-            cliente = Cliente (nombre=nombre, apellido=apellido,correo=correo)
-            cliente.save()
-            return render(request, "inicio.html")
-
-    else:
-        form = ClienteForm()
-    return render(request, "cliente.html", {"formulario":form})
-
-
-def producto_form_view(request):
-    if request.method == "POST":
-        form=ProductoForm(request.POST)  
-        print(form)
-        if form.is_valid():
-            info = form.cleaned_data
-            nombre = info['nombre']
-            descripcion = info['descripcion']
-            precio = info['precio']
-            producto = Producto (nombre=nombre, descripcion=descripcion,precio=precio)
-            producto.save()
-            return render(request, "inicio.html")
-    else:
-        form = ProductoForm()
-    return render(request, "cliente.html", {"formulario":form})
-
-
-def envio_form_view(request):
-    if request.method == "POST":
-        form=EnvioForm(request.POST)  
-        print(form)
-        if form.is_valid():
-            info = form.cleaned_data
-            calle = info['calle']
-            altura = info['altura']
-            ciudad = info['ciudad']
-            envio = Envio (calle=calle, altura=altura,ciudad=ciudad)
-            envio.save()
-            return render(request, "inicio.html")
-    else:
-        form = EnvioForm()
-    return render(request, "envio.html", {"formulario":form})
-
-
-### busqueda ###
-
-def busqueda_cliente_view(request):
-    return render(request, "busquedaCliente.html")
-
-
-def buscar(request):
-    correo = request.GET.get('correo')
-    if correo:
-        clientes = Cliente.objects.filter(correo__icontains=correo)
-        return render(request, "resultadoBusqueda.html", {"clientes": clientes})
-    else:
-        return render(request, "resultadoBusqueda.html", {"clientes": None})
-    
-
-########################################################
 
 class LoginPagina(LoginView):
     template_name = 'login.html'
@@ -125,4 +60,89 @@ class CambioPassword(PasswordChangeView):
 def password_exitoso(request):
     return render(request, 'passwordExitoso.html', {})
 
+@login_required
+def signout(request):
+    logout(request)
+    return redirect('inicio')
 
+# Libro Romance
+
+class RomanceLista(LoginRequiredMixin, ListView):
+    context_object_name = 'romances'
+    queryset = Libros.objects.filter(libros__startswith='romance')
+    template_name = 'listaRomance.html'
+    login_url = '/login/'
+
+class RomanceDetalle(LoginRequiredMixin, DetailView):
+    model = Libros
+    context_object_name = 'romance'
+    template_name = 'romanceDetalle.html'
+
+class RomanceUpdate(LoginRequiredMixin, UpdateView):
+    model = Libros
+    form_class = ActualizacionLibros
+    success_url = reverse_lazy('romance')
+    context_object_name = 'romance'
+    template_name = 'romanceEdicion.html'
+
+class RomanceDelete(LoginRequiredMixin, DeleteView):
+    model = Libros
+    success_url = reverse_lazy('romance')
+    context_object_name = 'romance'
+    template_name = 'romanceBorrado.html'
+
+# Libro Fantasia
+
+class FantasiaLista(LoginRequiredMixin, ListView):
+    context_object_name = 'fantasias'
+    queryset = Libros.objects.filter(libros__startswith='fantasia')
+    template_name = 'listaFantasia.html'
+    login_url = '/login/'
+
+class FantasiaDetalle(LoginRequiredMixin, DetailView):
+    model = Libros
+    context_object_name = 'fantasia'
+    template_name = 'fantasiaDetalle.html'
+
+class FantasiaUpdate(LoginRequiredMixin, UpdateView):
+    model = Libros
+    form_class = ActualizacionLibros
+    success_url = reverse_lazy('fantasia')
+    context_object_name = 'fantasia'
+    template_name = 'fantasiaEdicion.html'
+
+class FantasiaDelete(LoginRequiredMixin, DeleteView):
+    model = Libros
+    success_url = reverse_lazy('fantasia')
+    context_object_name = 'fantasia'
+    template_name = 'fantasiaBorrado.html'
+
+
+# COMENTARIOS
+
+class ComentarioPagina(LoginRequiredMixin, CreateView):
+    model = Comentario
+    form_class = FormularioComentario
+    template_name = 'comentario.html'
+    success_url = reverse_lazy('inicio')
+
+    def form_valid(self, form):
+        form.instance.comentario_id = self.kwargs['pk']
+        return super(ComentarioPagina, self).form_valid(form)
+
+# CREACION LIBROS
+
+class LibrosCreacion(LoginRequiredMixin, CreateView):
+    model = Libros
+    form_class = FormularioNuevoLibros
+    success_url = reverse_lazy('inicio')
+    template_name = 'librosCreacion.html'
+
+    def form_valid(self, form):
+        form.instance.user = self.request.user
+        return super(LibrosCreacion, self).form_valid(form)
+
+# ACERCA DE MI
+
+def about(request):
+    return render(request, 'acercaDeMi.html', {})

@@ -1,0 +1,40 @@
+{% extends 'inicio.html' %}
+
+{% block contenido %}
+
+<br>
+<br>
+
+
+
+
+
+<div class="container text-center">
+    <h1>Fantasia</h1>
+</div>
+
+<br>
+
+<div class="container text-center">
+    <div class="row">
+            {% for fantasia in fantasias %}
+            <div class="col-sm-6 align-items-center">
+                <div class="card-body">
+                <img src="{{fantasia.imagenLibros.url}}" class="" width="100px">
+                {{fantasia.titulo}}
+                <a href="{% url 'fantasia' fantasia.id %}"><i class="bi bi-eye"></i></a>
+                {% if user.id == fantasia.usuario.id %}
+                <a href="{% url 'fantasia_editar' fantasia.id %}"><i class="bi bi-pencil-fill"></i></a>
+                <a href="{% url 'fantasia_eliminar' fantasia.id %}"><i class="bi bi-trash text-danger"></i></a>
+                <br>
+                <br>
+                <br>
+                <br>
+                {% endif %}
+                </div>
+            </div>
+            {% endfor %}
+    </div>
+</div>
+
+{% endblock %}

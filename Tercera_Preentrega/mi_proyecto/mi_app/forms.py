@@ -1,26 +1,8 @@
 from django import forms
 from django.contrib.auth.forms import UserChangeForm, UserCreationForm, PasswordChangeForm
 from django.contrib.auth.models import User 
+from mi_app.models import Libros, Comentario
 
-
-
-class ClienteForm(forms.Form):
-    nombre = forms.CharField(max_length=50)
-    apellido = forms.CharField(max_length=50)
-    correo = forms.EmailField()
-
-class ProductoForm(forms.Form):
-    nombre = forms.CharField(max_length=50)
-    descripcion = forms.CharField(max_length=50)
-    precio = forms.IntegerField()
-
-class EnvioForm(forms.Form):
-    calle = forms.CharField(max_length=70)
-    altura = forms.IntegerField()
-    ciudad = forms.CharField(max_length=20)
-
-
-    ##########################################################################
 
 class FormularioRegistroUsuario(UserCreationForm):
     first_name = forms.CharField(max_length=20, label='Nombre', widget=forms.TextInput(attrs={'class':'form-control'}))
@@ -57,4 +39,45 @@ widget=forms.PasswordInput(attrs={'class':'form-control'}))
     class Meta:
         model = User
         fields = ('old_password', 'new_password1', 'new_password2')
+
+class FormularioNuevoLibros(forms.ModelForm):
+    class Meta:
+        model = Libros
+        fields = ('usuario', 'titulo', 'libros', 'autor', 'descripcion', 'year', 'telefonoContacto', 'emailContacto', 'imagenLibros')
+
+        widgets = {
+            'usuario': forms.TextInput(attrs={'class': 'form-control', 'value': '', 'id':'usuario_id', 'type':'hidden'}),
+            'titulo' : forms.TextInput(attrs={'class': 'form-control'}),
+            'libros' : forms.Select(attrs={'class': 'form-control'}),
+            'autor' : forms.TextInput(attrs={'class': 'form-control'}),
+            'descripcion' : forms.Textarea(attrs={'class': 'form-control'}),
+            'year' : forms.TextInput(attrs={'class': 'form-control'}),
+            'telefonoContacto' : forms.TextInput(attrs={'class': 'form-control'}),
+            'emailContacto' : forms.TextInput(attrs={'class': 'form-control'}),
+        }
+
+
+class ActualizacionLibros(forms.ModelForm):
+    class Meta:
+        model = Libros
+        fields = ('titulo', 'libros', 'autor', 'descripcion', 'year', 'telefonoContacto', 'emailContacto', 'imagenLibros')
+
+        widgets = {
+            'titulo' : forms.TextInput(attrs={'class': 'form-control'}),
+            'libros' : forms.Select(attrs={'class': 'form-control'}),
+            'autor' : forms.TextInput(attrs={'class': 'form-control'}),
+            'descripcion' : forms.Textarea(attrs={'class': 'form-control'}),
+            'year' : forms.TextInput(attrs={'class': 'form-control'}),
+            'telefonoContacto' : forms.TextInput(attrs={'class': 'form-control'}),
+            'emailContacto' : forms.TextInput(attrs={'class': 'form-control'}),
+        }
+
+class FormularioComentario(forms.ModelForm):
+    class Meta:
+        model = Comentario
+        fields = ('nombre', 'mensaje')
+        widgets = {
+            'nombre': forms.TextInput(attrs={'class': 'form-control'}),
+            'mensaje' : forms.Textarea(attrs={'class': 'form-control'}),
+        }
 

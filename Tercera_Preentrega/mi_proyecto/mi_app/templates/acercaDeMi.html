@@ -1,0 +1,44 @@
+
+{% extends 'inicio.html' %}
+{% load static %}
+
+{% block contenido %}
+
+<br>
+<br>
+
+
+    <div class="container">
+       <h2 class="text-center text-dark">
+           Acerca de nosotros
+       </h2>
+       <br>
+       <div class="row g-4">
+           <div class="col-md-6 col-lg-3">
+               <div class="card bg-success">
+                    <div class="card-body text-center">
+                        <img src="{% static 'imagenes/pkm-pareja.png' %}" class="rounded-circle mb-3" width="150px">
+                    <h3 class="card-title mb-3">Conticello Ibo y Kowalezuk Sol</h3>
+                    <p class="card-text">Seguinos en:</p>
+                    <a href="https://github.com/IboConticello"><i class="bi bi-github text-dark mx-1"></i></a>
+                    <a href="https://github.com/KowalezukSol"><i class="bi bi-github text-dark mx-1"></i></a>
+                    </div>
+               </div>
+           </div>
+           <div class="col">
+            <div class="">
+                 <div class="text-center">
+                    <p>Hola que tal! Somos Ibo y Sol, somos pareja y nos interesa mucho el mundo de la programación. Estos son nuestros primeros pasos, muy contentos de aprender!</p>
+                 </div>
+            </div>
+        </div>
+       </div>
+    </div>
+    <br>
+    <br>
+    <br>
+    <br>
+
+
+
+{% endblock %}

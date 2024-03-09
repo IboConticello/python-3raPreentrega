@@ -1,0 +1,41 @@
+{% extends 'inicio.html' %}
+
+{% block contenido %}
+
+<br>
+<br>
+
+<div class="container">
+
+<p><h4>{{romance.titulo}}</h4></p>
+
+{% if romance.imagenLibros %}
+    <p><img src="{{romance.imagenLibros.url}}" alt=""></p>
+{% endif %}
+<p>Autor: {{romance.autor}}</p>
+<p>Descripción: {{romance.descripcion}}</p>
+<p>Año: {{romance.year}}</p>
+<p>Teléfono de Contacto: {{romance.telefonoContacto}}</p>
+<p>Email de Contacto: {{romance.emailContacto}}</p>
+
+</div>
+<br>
+<div class="container">
+    <h4>Comentarios...</h4>
+    <br>
+    <div class="container">
+    {% if not romance.comentarios.all %}
+        No han comentado este libro
+    {% else %}
+        {% for comentario in romance.comentarios.all %}
+        <p><strong>{{comentario.nombre}}</strong></p>
+        <p>{{comentario.mensaje}}</p>
+        <p><small>{{comentario.fechaComentario}}</small></p>
+        <hr>
+        {% endfor %}
+    {% endif %}
+    <a href="{% url 'comentario' romance.pk %}">Agrega un Comentario</a>
+    </div>
+</div>
+<br>
+{% endblock %}

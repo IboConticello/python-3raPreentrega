@@ -1,0 +1,36 @@
+{% extends 'inicio.html' %}
+
+{% block contenido %}
+
+
+<br>
+<br>
+
+<div class="container text-center">
+    <h1>Romance</h1>
+</div>
+
+<br>
+<div class="container text-center">
+    <div class="row">
+            {% for romance in romances %}
+            <div class="col-sm-6 align-items-center">
+                <div class="card-body">
+                <img src="{{romance.imagenLibros.url}}" class="" width="100px">
+                {{romance.titulo}}
+                <a href="{% url 'romance' romance.id %}"><i class="bi bi-eye"></i></a>
+                {% if user.id == romance.usuario.id %}
+                <a href="{% url 'romance_editar' romance.id %}"><i class="bi bi-pencil-fill"></i></a>
+                <a href="{% url 'romance_eliminar' romance.id %}"><i class="bi bi-trash text-danger"></i></a>
+                <br>
+                <br>
+                <br>
+                <br>
+                {% endif %}
+                </div>
+            </div>
+            {% endfor %}
+    </div>
+</div>
+
+{% endblock %}
